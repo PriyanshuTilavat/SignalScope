@@ -84,3 +84,16 @@ desktop.ini
 *.tmp
 *.temp
 *.cache
+# SignalScope local datasets
+backend/dataset/
+backend/dataset_expanded/
+backend/dataset_universal/
+backend/dataset_gemini/
+backend/dataset_gemini_expanded/
+backend/dataset_tigas/
+backend/kaggle_gemini/
+
+# Model weights
+backend/models/*.pth
+backend/models/*.pt
+backend/models/*.onnx
