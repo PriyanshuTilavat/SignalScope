@@ -6,6 +6,14 @@ SignalScope is a computer-vision system that estimates whether an uploaded image
 
 > **Responsible-use note:** SignalScope provides a likelihood-based assessment. It should not be treated as definitive proof of image authenticity and should not be used for accusations or high-stakes decisions.
 
+## Project Demonstration Video
+
+Due to GitHub's file size limitations, the full video demonstration for this project is hosted on Google Drive.
+
+You can view or download the video using the link below:
+
+-> https://drive.google.com/file/d/1TFptErK_db63OZvosd1RYWaQ6Z2xEq2M/view?usp=drivesdk
+
 ---
 
 ## 1. Problem Statement
@@ -249,23 +257,23 @@ The official organizer-held-out test set was not available during development, s
 
 The previously expanded production baseline achieved:
 
-| Metric | Result |
-|---|---:|
+| Metric   | Result |
+| -------- | -----: |
 | Accuracy | 87.00% |
-| Macro-F1 | ~0.87 |
-| ROC-AUC | 0.9438 |
+| Macro-F1 |  ~0.87 |
+| ROC-AUC  | 0.9438 |
 
 The final Universal model was selected because it provided substantially better coverage of Gemini while retaining useful performance on other generator families and an unseen-generator evaluation.
 
 ### Final Universal generator evaluation
 
 | Source / generator | Accuracy |
-|---|---:|
-| Gemini | 88% |
-| DALL-E 2 | 81% |
-| SDXL | 91% |
-| Real images | 72% |
-| CycleGAN (unseen) | 41% |
+| ------------------ | -------: |
+| Gemini             |      88% |
+| DALL-E 2           |      81% |
+| SDXL               |      91% |
+| Real images        |      72% |
+| CycleGAN (unseen)  |      41% |
 
 ### Unseen-generator evaluation
 
@@ -301,13 +309,13 @@ A 200-image evaluation subset was used to test common image transformations.
 
 Results for the baseline evaluation:
 
-| Condition | Accuracy | Macro-F1 |
-|---|---:|---:|
-| Original | 85.00% | 85.58% |
-| JPEG quality 40 | 82.00% | 82.18% |
-| Gaussian blur | 66.00% | 73.85% |
-| Brightness 0.75 | 82.50% | 82.76% |
-| Resize and restore | 84.50% | 85.84% |
+| Condition          | Accuracy | Macro-F1 |
+| ------------------ | -------: | -------: |
+| Original           |   85.00% |   85.58% |
+| JPEG quality 40    |   82.00% |   82.18% |
+| Gaussian blur      |   66.00% |   73.85% |
+| Brightness 0.75    |   82.50% |   82.76% |
+| Resize and restore |   84.50% |   85.84% |
 
 The most significant observed weakness was Gaussian blur.
 

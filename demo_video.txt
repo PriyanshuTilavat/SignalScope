@@ -1,0 +1,7 @@
+Project Demonstration Video
+---------------------------
+Due to GitHub's file size limitations, the full video demonstration for this project is hosted on Google Drive. 
+
+You can view or download the video using the link below:
+
+-> https://drive.google.com/file/d/1TFptErK_db63OZvosd1RYWaQ6Z2xEq2M/view?usp=drivesdk
