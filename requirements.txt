@@ -35,8 +35,9 @@ numpy
 matplotlib
 scikit-learn
 
-These dependencies are also listed in the project requirements.txt file.
+These dependencies are listed in:
 
+backend\requirements.txt
 ============================================================
 2. GET THE PROJECT
 ============================================================
@@ -52,12 +53,13 @@ cd SignalScope
 The project should contain:
 
 README.md
-requirements.txt
-model/
 backend/
+│   ├── requirements.txt
+│   ├── app/
+│   ├── models/
+│   └── training/
 frontend/
 report/
-
 ============================================================
 3. DOWNLOAD THE FINAL MODEL
 ============================================================
@@ -117,7 +119,7 @@ Then activate again:
 
 From the backend directory, run:
 
-pip install -r ..\requirements.txt
+python -m pip install -r requirements.txt
 
 This installs the Python packages required for SignalScope backend and model inference.
 
@@ -207,28 +209,30 @@ or
 Likely real
 
 The result is not intended to be treated as definitive proof of image origin.
-
 ============================================================
 10. COMPLETE BACKEND COMMAND SEQUENCE
 ============================================================
 
-For a Windows machine, the backend can be started with:
+For a Windows machine, run:
 
 cd E:\SignalScope\backend
 python -m venv venv
-.\venv\Scripts\Activate.ps1
-pip install -r ..\requirements.txt
-$env:PYTHONPATH="."
-uvicorn app.main:app --reload
-
-If PowerShell blocks activation:
-
-cd E:\SignalScope\backend
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\venv\Scripts\Activate.ps1
-pip install -r ..\requirements.txt
+python -m pip install -r requirements.txt
 $env:PYTHONPATH="."
-uvicorn app.main:app --reload
+python -m uvicorn app.main:app --reload
+
+PowerShell execution-policy note:
+
+If PowerShell blocks activation, run:
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+Then:
+
+.\venv\Scripts\Activate.ps1
+
 
 ============================================================
 11. COMPLETE FRONTEND COMMAND SEQUENCE
@@ -324,7 +328,7 @@ Then run backend:
 cd E:\SignalScope\backend
 python -m venv venv
 .\venv\Scripts\Activate.ps1
-pip install -r ..\requirements.txt
+python -m pip install -r requirements.txt
 $env:PYTHONPATH="."
 uvicorn app.main:app --reload
 
