@@ -1,0 +1,410 @@
+SIGNALSCOPE – REQUIREMENTS AND COMPLETE RUN INSTRUCTIONS
+
+SignalScope is an AI-generated image detection system with a React/Vite frontend and a FastAPI/PyTorch backend. The final application uses the Universal SignalScope model and supports CPU inference, AI/Real probability, confidence, verdict, Grad-CAM explanation, prediction history, and Clear History.
+
+============================================================
+1. REQUIREMENTS
+============================================================
+
+Hardware:
+- A normal Windows PC/laptop is sufficient.
+- GPU is NOT required for inference.
+
+Software:
+- Python 3.x
+- Node.js
+- npm
+- Git
+
+Check the installed software with:
+
+python --version
+node --version
+npm --version
+git --version
+
+Python packages required by the backend:
+
+torch
+torchvision
+fastapi
+uvicorn[standard]
+python-multipart
+Pillow
+numpy
+matplotlib
+scikit-learn
+
+These dependencies are also listed in the project requirements.txt file.
+
+============================================================
+2. GET THE PROJECT
+============================================================
+
+Clone the GitHub repository:
+
+git clone https://github.com/PriyanshuTilavat/SignalScope.git
+
+Move into the project folder:
+
+cd SignalScope
+
+The project should contain:
+
+README.md
+requirements.txt
+model/
+backend/
+frontend/
+report/
+
+============================================================
+3. DOWNLOAD THE FINAL MODEL
+============================================================
+
+The trained model weights are distributed through the GitHub Release instead of being stored directly in the normal Git history.
+
+Open:
+
+https://github.com/PriyanshuTilavat/SignalScope/releases/tag/v1.0.0
+
+Download:
+
+signalscope_model_universal.pth
+
+Place the downloaded file inside:
+
+backend\models\
+
+The final application expects:
+
+backend\models\signalscope_model.pth
+
+If the downloaded file is named signalscope_model_universal.pth, open PowerShell from the project root and run:
+
+cd backend
+Copy-Item models\signalscope_model_universal.pth models\signalscope_model.pth -Force
+
+============================================================
+4. CREATE THE PYTHON ENVIRONMENT
+============================================================
+
+Open PowerShell in the SignalScope project folder.
+
+Run:
+
+cd backend
+
+Create a virtual environment:
+
+python -m venv venv
+
+Activate the environment:
+
+.\venv\Scripts\Activate.ps1
+
+If PowerShell gives an execution-policy error, run:
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+Then activate again:
+
+.\venv\Scripts\Activate.ps1
+
+============================================================
+5. INSTALL PYTHON DEPENDENCIES
+============================================================
+
+From the backend directory, run:
+
+pip install -r ..\requirements.txt
+
+This installs the Python packages required for SignalScope backend and model inference.
+
+============================================================
+6. CONFIGURE PYTHON PATH
+============================================================
+
+Still inside the backend directory, run:
+
+$env:PYTHONPATH="."
+
+This allows Python to find the FastAPI application package.
+
+============================================================
+7. START THE SIGNALSCOPE BACKEND
+============================================================
+
+Run:
+
+uvicorn app.main:app --reload
+
+When the server starts successfully, the backend is available at:
+
+http://127.0.0.1:8000
+
+Keep this PowerShell window open.
+
+FastAPI interactive API documentation is available at:
+
+http://127.0.0.1:8000/docs
+
+The main prediction endpoint is:
+
+POST /api/predict
+
+============================================================
+8. START THE FRONTEND
+============================================================
+
+Open a SECOND PowerShell window.
+
+Move to the project root:
+
+cd E:\SignalScope
+
+Move into the frontend:
+
+cd frontend
+
+Install frontend dependencies:
+
+npm install
+
+Start the Vite development server:
+
+npm run dev
+
+Vite will print the local frontend URL. Normally it is:
+
+http://localhost:5173
+
+Open the URL shown in the terminal in a web browser.
+
+============================================================
+9. USE SIGNALSCOPE
+============================================================
+
+With both backend and frontend running:
+
+1. Open the SignalScope frontend.
+2. Upload an image.
+3. The frontend sends the image to the FastAPI prediction endpoint.
+4. The backend preprocesses the image.
+5. The ResNet18 model performs inference.
+6. The application calculates AI probability and Real probability.
+7. The application shows confidence and a likelihood-based verdict.
+8. Grad-CAM is generated and displayed.
+9. The prediction can be stored in history.
+10. The Clear History button removes saved prediction history.
+
+The application uses likelihood-based wording:
+
+Likely AI-generated
+
+or
+
+Likely real
+
+The result is not intended to be treated as definitive proof of image origin.
+
+============================================================
+10. COMPLETE BACKEND COMMAND SEQUENCE
+============================================================
+
+For a Windows machine, the backend can be started with:
+
+cd E:\SignalScope\backend
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r ..\requirements.txt
+$env:PYTHONPATH="."
+uvicorn app.main:app --reload
+
+If PowerShell blocks activation:
+
+cd E:\SignalScope\backend
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\venv\Scripts\Activate.ps1
+pip install -r ..\requirements.txt
+$env:PYTHONPATH="."
+uvicorn app.main:app --reload
+
+============================================================
+11. COMPLETE FRONTEND COMMAND SEQUENCE
+============================================================
+
+Open another PowerShell window and run:
+
+cd E:\SignalScope\frontend
+npm install
+npm run dev
+
+Then open the Vite URL shown in the terminal, normally:
+
+http://localhost:5173
+
+============================================================
+12. MODEL SETUP COMMAND
+============================================================
+
+If the Universal model has already been downloaded into:
+
+E:\SignalScope\backend\models\signalscope_model_universal.pth
+
+run:
+
+cd E:\SignalScope\backend
+Copy-Item models\signalscope_model_universal.pth models\signalscope_model.pth -Force
+
+Verify the files:
+
+Get-Item models\signalscope_model.pth, models\signalscope_model_universal.pth | Select-Object Name,Length
+
+============================================================
+13. TROUBLESHOOTING
+============================================================
+
+If you see:
+
+ModuleNotFoundError: No module named 'app'
+
+make sure you are inside:
+
+E:\SignalScope\backend
+
+and run:
+
+$env:PYTHONPATH="."
+
+Then start:
+
+uvicorn app.main:app --reload
+
+If the model cannot be found, verify that this file exists:
+
+E:\SignalScope\backend\models\signalscope_model.pth
+
+If only the Universal model exists, run:
+
+cd E:\SignalScope\backend
+Copy-Item models\signalscope_model_universal.pth models\signalscope_model.pth -Force
+
+If npm is not recognized, install Node.js and verify:
+
+node --version
+npm --version
+
+If Python is not recognized, install Python and verify:
+
+python --version
+
+============================================================
+14. HOW TO STOP THE APPLICATION
+============================================================
+
+In the backend terminal press:
+
+Ctrl + C
+
+In the frontend terminal press:
+
+Ctrl + C
+
+============================================================
+15. QUICK START FOR A MACHINE THAT ALREADY HAS PYTHON AND NODE.JS
+============================================================
+
+Download the model from:
+
+https://github.com/PriyanshuTilavat/SignalScope/releases/tag/v1.0.0
+
+Then run backend:
+
+cd E:\SignalScope\backend
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r ..\requirements.txt
+$env:PYTHONPATH="."
+uvicorn app.main:app --reload
+
+In a second terminal run frontend:
+
+cd E:\SignalScope\frontend
+npm install
+npm run dev
+
+Open:
+
+http://localhost:5173
+
+============================================================
+16. IMPORTANT PROJECT FILES
+============================================================
+
+Backend application:
+
+backend\app\main.py
+
+Machine-learning model:
+
+backend\app\ml\model.py
+
+Inference:
+
+backend\app\ml\inference.py
+
+Preprocessing:
+
+backend\app\ml\preprocessing.py
+
+Grad-CAM:
+
+backend\app\ml\gradcam.py
+
+Final production model:
+
+backend\models\signalscope_model.pth
+
+Training and evaluation scripts:
+
+backend\training\
+backend\
+
+Frontend:
+
+frontend\
+
+Model report:
+
+report\model_report.md
+
+============================================================
+17. FINAL RESULT
+============================================================
+
+After completing the steps above, SignalScope should be running with:
+
+Frontend:
+http://localhost:5173
+
+Backend:
+http://127.0.0.1:8000
+
+API documentation:
+http://127.0.0.1:8000/docs
+
+Prediction endpoint:
+POST /api/predict
+
+The application can then be used to upload images and view:
+
+- AI probability
+- Real probability
+- Confidence
+- Likely AI-generated / Likely real verdict
+- Grad-CAM explanation
+- Prediction history
+- Clear History
+
+This document provides the requirements, environment setup, model setup, exact commands, backend startup, frontend startup, usage flow, and troubleshooting needed to run SignalScope from the GitHub repository.
